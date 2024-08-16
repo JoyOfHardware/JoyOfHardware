@@ -6,24 +6,37 @@ fn main() {
 
 static COUNTER: Lazy<Mutable<i32>> = lazy::default();
 
-fn root() -> impl Element {
-    // background.
-    let gradient = "linear-gradient(to bottom, orange, white)";
+use zoon::*;
+
+fn banner() -> impl Element {
     Column::new()
-        .update_raw_el(|raw_el| {
-            raw_el.style("background", gradient)
-            }
+        .s(Align::new().top()) // Align the banner to the top
+        .s(Padding::new().y(20).x(10)) // Add padding around the banner
+        .item(
+            El::new()
+                .s(Font::new().size(100).weight(FontWeight::ExtraBold)) // Set font size and thickness
+                .s(Align::center())
+                .s(Font::new().color(color!("orange"))) // Set the font color to orange
+                .child("Build Amazing Hardware"),
         )
+}
+
+// Modify the root function to include the banner and rounded corners
+fn root() -> impl Element {
+    let gradient = "linear-gradient(to bottom, orange, white)";
+    Row::new()
+        .s(Background::new().color(color!("#ffffff")))
         .s(Width::fill())
         .s(Height::fill())
-        .s(Background::new().color(color!("#edc8f5")))
         .item(
-            Row::new()
-                .s(Align::center())
-                .s(Gap::new().x(15))
-                .item(counter_button("-", -1))
-                .item_signal(COUNTER.signal())
-                .item(counter_button("+", 1)),
+            El::new()
+                .s(Width::percent(50).min(600))
+                .child(banner())
+        )
+        .item(
+            El::new()
+                .s(Width::fill())
+                .child("Text")
         )
 }
 
