@@ -7,12 +7,24 @@ fn main() {
 static COUNTER: Lazy<Mutable<i32>> = lazy::default();
 
 fn root() -> impl Element {
-    Row::new()
-        .s(Align::center())
-        .s(Gap::new().x(15))
-        .item(counter_button("-", -1))
-        .item_signal(COUNTER.signal())
-        .item(counter_button("+", 1))
+    // background.
+    let gradient = "linear-gradient(to bottom, orange, white)";
+    Column::new()
+        .update_raw_el(|raw_el| {
+            raw_el.style("background", gradient)
+            }
+        )
+        .s(Width::fill())
+        .s(Height::fill())
+        .s(Background::new().color(color!("#edc8f5")))
+        .item(
+            Row::new()
+                .s(Align::center())
+                .s(Gap::new().x(15))
+                .item(counter_button("-", -1))
+                .item_signal(COUNTER.signal())
+                .item(counter_button("+", 1)),
+        )
 }
 
 fn counter_button(label: &str, step: i32) -> impl Element {

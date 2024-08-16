@@ -8,7 +8,7 @@ async fn frontend() -> Frontend {
             "
         <style>
             html {
-                background-color: black;
+                background-color: white;
             }
         </style>",
         )
