@@ -6,6 +6,7 @@ fn main() {
 }
 
 static COUNTER: Lazy<Mutable<i32>> = lazy::default();
+static NEW_MESSAGE_TEXT: Lazy<Mutable<String>> = lazy::default();
 
 use zoon::*;
 
@@ -22,29 +23,46 @@ fn banner() -> impl Element {
         )
 }
 
+fn do_thing() {
+    eprintln!("Got Enter!");;
+}
+
 fn login_form() -> impl Element {
     Column::new()
         .s(Align::new().right()) // Align the form to the right
         .s(Padding::new().y(20).x(20)) // Add padding around the form
         .item(
             TextInput::new()
-                .s(Width::exact(200))
-                .placeholder("Username") // Set a placeholder
-                .on_change(|text| {
-                    // Handle the change in the username input
-                    eprintln!("Username: {}", text);
-                })
+            .s(Padding::all(10))
+            .s(RoundedCorners::new().left(5))
+            .s(Width::fill())
+            .s(Font::new().size(17))
+            .focus(true)
+            .on_change(|text| NEW_MESSAGE_TEXT.set(text))
+            .label_hidden("New message text")
+            .placeholder(Placeholder::new("Message"))
+            .on_key_down_event(|event| event.if_key(Key::Enter, do_thing))
+            .text_signal(NEW_MESSAGE_TEXT.signal_cloned())
         )
-        .item(
-            TextInput::new()
-                .s(Width::exact(200))
-                .input_type(InputType::password()) // Use the correct password input type
-                .placeholder("Password") // Set a placeholder
-                .on_change(|text| {
-                    // Handle the change in the password input
-                    log!("Password: {}", text);
-                })
-        )
+        // .item(
+        //     TextInput::new()
+        //         .s(Width::exact(200))
+        //         .placeholder("Username") // Set a placeholder
+        //         .on_change(|text| {
+        //             // Handle the change in the username input
+        //             eprintln!("Username: {}", text);
+        //         })
+        // )
+        // .item(
+        //     TextInput::new()
+        //         .s(Width::exact(200))
+        //         .input_type(InputType::password()) // Use the correct password input type
+        //         .placeholder("Password") // Set a placeholder
+        //         .on_change(|text| {
+        //             // Handle the change in the password input
+        //             eprintln!("Username: {}", text);
+        //         })
+        // )
         .item(
             Button::new()
                 .s(Width::exact(200))
