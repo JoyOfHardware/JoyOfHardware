@@ -2,6 +2,15 @@
 
 The beginnings of the Joy of Hardware Platform.
 
+# Using
+
+The following assumes NixOS.
+
+```bash
+nix-shell
+mzoon start
+```
+
 # TODO
 
 ## Frontend Tasks
