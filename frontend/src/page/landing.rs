@@ -1,8 +1,6 @@
-
 use zoon::*;
 use zoon::eprintln;
 use std::rc::Rc;
-use crate::WINDOW_SIZE;
 
 fn scale_linearly_and_clamp(x: u32, in_min: u32, in_max: u32, out_min: u32, out_max: u32) -> u32 {
     let x           = x as f32;
@@ -35,7 +33,6 @@ fn build_amazing_hardware_column_hero(font_size: u32) -> impl Element {
     El::new()
         .s(Align::center())
         .s(Width::fill().max(600))
-        // .s(Padding::all(10))
         .s(RoundedCorners::all(25))
         .s(Height::fill().max(800))
         .s(Shadows::new([Shadow::new().blur(50).color("#dddddd")]))
@@ -57,7 +54,12 @@ fn call_to_action_panel() -> impl Element {
             .line(FontLine::new().underline_signal(hover_signal.map_bool(|| true, || false))))
         .label("Let's Go! 👉")
         .on_hovered_change(move |is_hovered| hovered.set_neq(is_hovered))
-        .on_press(|| eprintln!("Let's Go button pressed"))
+        .on_press(|| 
+            {
+                crate::router::ROUTER.go(crate::router::Route::Login);
+                eprintln!("Let's Go button pressed");
+            }
+        )
 }
 
 pub fn page() -> impl Element {
@@ -68,9 +70,9 @@ pub fn page() -> impl Element {
         .s(Height::fill().min(600))
         .multiline()
         .on_viewport_size_change(|width, _| {
-            WINDOW_SIZE.set_neq(width as u32);
+            crate::WINDOW_SIZE.set_neq(width as u32);
         })
-        .item_signal(WINDOW_SIZE.signal().map(|window_width| {
+        .item_signal(crate::WINDOW_SIZE.signal().map(|window_width| {
             let font_size = scale_linearly_and_clamp(window_width, 300, 1200, 50, 100);
             build_amazing_hardware_column_hero(font_size)
         }))

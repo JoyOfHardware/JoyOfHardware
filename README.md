@@ -23,11 +23,7 @@ mzoon start
 
 - [x] Finish landing page
 - [x] Pin `Cargo.toml` to a specific commit!
-- [ ] Create `globals.rs`
-- [ ] Implement routing
-- [ ] Mock out login page
-- [ ] Blocking login attempts to mongoDB
-  - [ ] Add time out if necessary
+- [x] Implement routing
 
 ### Goals
 
@@ -47,6 +43,11 @@ mzoon start
 - [ ] Dev ops injection
 
 ## Later
+- [ ] Create `globals.rs`
+- [ ] Create `utilities.rs`
+- [ ] Mock out login page
+- [ ] Blocking login attempts to mongoDB
+  - [ ] Add time out if necessary
 
 ### IDE
 
