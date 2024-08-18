@@ -4,11 +4,12 @@ The beginnings of the Joy of Hardware Platform.
 
 # Using
 
-The following assumes NixOS.
+The following assumes NixOS. Release builds take much longer to build
+but can result in substantial page loadtime savings.
 
 ```bash
 nix-shell
-mzoon start
+mzoon start --release
 ```
 
 # TODO
