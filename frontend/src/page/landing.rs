@@ -13,11 +13,19 @@ fn scale_linearly_and_clamp(x: u32, in_min: u32, in_max: u32, out_min: u32, out_
     clamped_val.round() as u32
 }
 
-fn build_text_element(text: &str, font_size: u32) -> impl Element {
+fn build_text_element_white(text: &str, font_size: u32) -> impl Element {
     El::new()
         .s(Font::new().size(font_size).weight(FontWeight::ExtraBold))
         .s(Align::new().left())
-        .s(Font::new().color(color!("orange")))
+        .s(Font::new().color(color!("white")))
+        .child(text)
+}
+
+fn build_text_element_orange(text: &str, font_size: u32) -> impl Element {
+    El::new()
+        .s(Font::new().size(font_size).weight(FontWeight::ExtraBold))
+        .s(Align::new().left())
+        .s(Font::new().color(color!("#87CEEB")))
         .child(text)
 }
 
@@ -26,9 +34,9 @@ fn build_amazing_hardware_column_hero(font_size: u32) -> impl Element {
         Column::new()
             .s(Align::center())
             .items(vec![
-                build_text_element("BUILD", font_size),
-                build_text_element("AMAZING", font_size),
-                build_text_element("HARDWARE", font_size),
+                build_text_element_white("BUILD", font_size).unify(),
+                build_text_element_white("AMAZING", font_size).unify(),
+                build_text_element_orange("HARDWARE", font_size).unify(),
             ]);
     El::new()
         .s(Align::center())
@@ -37,7 +45,7 @@ fn build_amazing_hardware_column_hero(font_size: u32) -> impl Element {
         .s(Height::fill().max(800))
         .s(Shadows::new([Shadow::new().blur(50).color("#dddddd")]))
         .update_raw_el(|raw_el| {
-            raw_el.style("background", "linear-gradient(to bottom, orange, white)")
+            raw_el.style("background", "linear-gradient(to bottom, #87CEEB, white)")
         })
         .child(column_of_text)
 }
