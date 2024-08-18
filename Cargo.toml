@@ -12,5 +12,5 @@ edition = "2021"
 publish = false
 
 [workspace.dependencies]
-moon = { git = "https://github.com/MoonZoon/MoonZoon", branch = "main" }
-zoon = { git = "https://github.com/MoonZoon/MoonZoon", branch = "main" }
+moon = { git = "https://github.com/MoonZoon/MoonZoon", rev = "fc73b0d" }
+zoon = { git = "https://github.com/MoonZoon/MoonZoon", rev = "fc73b0d" }
