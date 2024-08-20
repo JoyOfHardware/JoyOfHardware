@@ -28,7 +28,7 @@ mzoon start --release
 
 ## Later
 - [ ] basic log in UI(no logic)
-- [ ] re-factor out theme bits of code
+- [ ] re-factor out theme bits of code colors and assets
 - [ ] Create `globals.rs`
 - [ ] Create `utilities.rs`
 - [ ] Mock out login page

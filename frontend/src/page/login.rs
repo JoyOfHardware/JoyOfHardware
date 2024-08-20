@@ -44,15 +44,25 @@ impl LoginPage {
             ]);
 
         let column = Column::new()
-            // .s(Align::center())
             .s(Width::fill())
             .s(Height::fill())
             .s(Padding::new().y(25))
             .s(Gap::new().y(25))
             .items(vec![
                 title.unify(),
-                self.name_input().unify(),
-                self.password_input().unify()
+                crate::assets::form_input_field(
+                    "Username",
+                    self.username.clone(),
+                    InputType::text(),
+                    clone!((self => s) move |name| s.username.set(Arc::new(name)))
+                ).unify(),
+                crate::assets::form_input_field(
+                    "Password",
+                    self.password.clone(),
+                    InputType::password(),
+                    clone!((self => s) move |name| s.password.set(Arc::new(name)))
+                )
+                .unify(),
             ]);
 
         El::new()
@@ -69,43 +79,6 @@ impl LoginPage {
             .child(column)
     }
 
-    fn name_input(&self) -> impl Element {
-        TextInput::new()
-            .s(Align::new().center_x())
-            .s(Padding::new().x(10).y(10))
-            .s(Width::fill().max(300))
-            .placeholder(Placeholder::new("Username"))
-            .s(Borders::new().bottom(
-                Border::new().width(2).color(color!("#dddddd"))))
-            .s(Background::new().color(color!("#f0f0f0")))
-            .s(RoundedCorners::all(5))
-            .label_hidden("Username")
-            .text_signal(
-                self.username
-                    .signal_cloned()
-            )
-            .on_change(clone!((self => s) move |name| s.username.set(Arc::new(name))))
-    }
-
-    fn password_input(&self) -> impl Element {
-        TextInput::new()
-            .input_type(InputType::password())
-            .s(Align::new().center_x())
-            .s(Padding::new().x(10).y(10))
-            .s(Width::fill().max(300))
-            .placeholder(Placeholder::new("Password"))
-            .s(Borders::new().bottom(
-                Border::new().width(2).color(color!("#dddddd"))))
-            .s(Background::new().color(color!("#f0f0f0")))
-            .s(RoundedCorners::all(5))
-            .label_hidden("Password")
-            .text_signal(
-                self.password
-                    .signal_cloned()
-            )
-            .on_change(clone!((self => s) move |name| s.password.set(Arc::new(name))))
-    }
-    
     pub fn page(&self) -> impl Element {
 
         El::new()
