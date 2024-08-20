@@ -26,6 +26,16 @@ mzoon start --release
 - [x] Pin `Cargo.toml` to a specific commit!
 - [x] Implement routing
 
+## Monday August 19th
+ - [ ] re-factor pages to have every page use a struct
+
+## Later
+- [ ] Create `globals.rs`
+- [ ] Create `utilities.rs`
+- [ ] Mock out login page
+- [ ] Blocking login attempts to mongoDB
+  - [ ] Add time out if necessary
+
 ### Goals
 
 - [ ] Responsive design
@@ -43,12 +53,6 @@ mzoon start --release
   - [ ] Go to URL with auth token
 - [ ] Dev ops injection
 
-## Later
-- [ ] Create `globals.rs`
-- [ ] Create `utilities.rs`
-- [ ] Mock out login page
-- [ ] Blocking login attempts to mongoDB
-  - [ ] Add time out if necessary
 
 ### IDE
 

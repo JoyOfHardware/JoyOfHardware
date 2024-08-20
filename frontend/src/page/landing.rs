@@ -77,9 +77,6 @@ pub fn page() -> impl Element {
         .s(Padding::all(25))
         .s(Height::fill().min(600))
         .multiline()
-        .on_viewport_size_change(|width, _| {
-            crate::WINDOW_SIZE.set_neq(width as u32);
-        })
         .item_signal(crate::WINDOW_SIZE.signal().map(|window_width| {
             let font_size = scale_linearly_and_clamp(window_width, 300, 1200, 50, 100);
             build_amazing_hardware_column_hero(font_size)
