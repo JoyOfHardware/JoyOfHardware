@@ -26,10 +26,9 @@ mzoon start --release
 - [x] Pin `Cargo.toml` to a specific commit!
 - [x] Implement routing
 
-## Monday August 19th
- - [ ] re-factor pages to have every page use a struct
-
 ## Later
+- [ ] basic log in UI(no logic)
+- [ ] re-factor out theme bits of code
 - [ ] Create `globals.rs`
 - [ ] Create `utilities.rs`
 - [ ] Mock out login page
