@@ -18,3 +18,7 @@ pub const fill_orange     : RgbaLegacy = color!("#fd7e14");
 
 pub const border_sky_blue : RgbaLegacy = color!("#d1ecf1");
 pub const fill_sky_blue   : RgbaLegacy = color!("#17a2b8");
+
+pub fn is_mobile(width : u32) -> bool {
+    width < 760
+}

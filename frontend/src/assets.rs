@@ -14,8 +14,6 @@ pub fn button_impact(
         .s(RoundedCorners::all(10))
         .s(Font::new().color(color!("white")))
         .s(Background::new().color(fill_color))
-        // .s(Borders::all(
-        //     Border::new().width(2).color(border_color)))
         .s(Shadows::new([Shadow::new().blur(10).spread(3).color(border_color)]))
         .label(text)
         .on_hovered_change(move |is_hovered| hovered.set_neq(is_hovered))

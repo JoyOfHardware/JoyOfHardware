@@ -19,10 +19,8 @@ impl LoginPage {
     }
 
     fn login_form(&self) -> impl Element {
-        let is_mobile = crate::WINDOW_SIZE.signal().map(|window_width| {
-            window_width < 760
-        });
-
+        let is_mobile = crate::WINDOW_SIZE.signal().map(crate::theme::is_mobile);
+        
         let adventure = El::new()
             .s(Font::new().size(50).weight(FontWeight::ExtraBold))
             .s(Align::new().left())
@@ -63,11 +61,13 @@ impl LoginPage {
                 );
 
                 Row::new()
-                    .s(Align::new().top())
+                    .s(Align::new().center_x())
+                    .s(AlignContent::new().center_x())
+                    .s(Padding::new().top(50))
                     .s(Width::fill())
-                    .s(Height::fill())
+                    // .s(Height::fill())
                     .s(Gap::new().x(50))
-                    .multiline()
+                    // .multiline()
                     .items(vec![
                         sign_up_button.unify(),
                         login_button.unify()
@@ -101,13 +101,23 @@ impl LoginPage {
             .s(Align::center())
             .s(Width::fill())
             .s(Height::fill())
-            .s(Padding::all(50))
+            .s(Padding::new()
+                .x_signal(
+                    crate::WINDOW_SIZE.signal().map(crate::theme::is_mobile)
+                        .map_bool(|| 15, || 35)
+                    )
+                )
+            .s(Padding::new().x(25))
             .s(RoundedCorners::all(25))
             // show a rounded shadow on desktop
-            .s(Shadows::with_signal(is_mobile.map_bool(
-                || [Shadow::new()],
-                || [Shadow::new().blur(50).color("#dddddd")],
-            )))
+            .s(Shadows::with_signal(
+                crate::WINDOW_SIZE.signal().map(crate::theme::is_mobile)
+                    .map_bool(
+                        || [Shadow::new()],
+                        || [Shadow::new().blur(50).color("#dddddd")],
+                    )
+                )
+            )
             .child(column)
     }
 
@@ -116,7 +126,7 @@ impl LoginPage {
         El::new()
             .s(Align::center())
             .s(Width::percent(90).max(400))
-            .s(Height::percent(90).max(600))
+            .s(Height::percent(90).max(500))
             .child(self.login_form())
     }
 
