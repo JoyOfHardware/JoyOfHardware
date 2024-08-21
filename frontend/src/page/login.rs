@@ -103,6 +103,7 @@ impl LoginPage {
             .s(Height::fill())
             .s(Padding::new()
                 .x_signal(
+                    // TODO : factor this out - message Martin for help
                     crate::WINDOW_SIZE.signal().map(crate::theme::is_mobile)
                         .map_bool(|| 15, || 35)
                     )
