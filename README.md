@@ -27,7 +27,9 @@ mzoon start --release
 - [x] Implement routing
 
 ## Later
-- [ ] basic log in UI(no logic)
+- [x] basic log in UI(no logic)
+- [ ] message Martin about cloning difficulties on is_mobile
+- update Favicon to smiley face emoji!
 - [ ] re-factor out theme bits of code colors and assets
 - [ ] Create `globals.rs`
 - [ ] Create `utilities.rs`
