@@ -25,7 +25,7 @@ fn build_text_element_orange(text: &str, font_size: u32) -> impl Element {
     El::new()
         .s(Font::new().size(font_size).weight(FontWeight::ExtraBold))
         .s(Align::new().left())
-        .s(Font::new().color(color!("#87CEEB")))
+        .s(Font::new().color(color!("#fd7e14")))
         .child(text)
 }
 
@@ -43,9 +43,9 @@ fn build_amazing_hardware_column_hero(font_size: u32) -> impl Element {
         .s(Width::fill().max(600))
         .s(RoundedCorners::all(25))
         .s(Height::fill().max(800))
-        .s(Shadows::new([Shadow::new().blur(50).color("#dddddd")]))
+        .s(Shadows::new([Shadow::new().blur(50).color("#ffe5d1")]))
         .update_raw_el(|raw_el| {
-            raw_el.style("background", "linear-gradient(to bottom, #87CEEB, white)")
+            raw_el.style("background", format!("linear-gradient(to bottom, {}, white)", "#fd7e14").as_str())
         })
         .child(column_of_text)
 }

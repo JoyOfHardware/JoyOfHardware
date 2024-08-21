@@ -1,3 +1,4 @@
+use chrono::format::Pad;
 use zoon::*;
 use zoon::eprintln;
 use std::sync::Arc;
@@ -29,6 +30,7 @@ impl LoginPage {
             .child("Adventure");
 
         let awaits = El::new()
+            .s(Padding::new().bottom(10))
             .s(Font::new().size(50).weight(FontWeight::ExtraBold))
             .s(Align::new().right())
             .s(Font::new().color(color!("gray")))
@@ -42,6 +44,35 @@ impl LoginPage {
                 adventure.unify(),
                 awaits.unify(),
             ]);
+        
+            
+            let login_and_sign_up_button_row = 
+            {
+                let login_button = crate::assets::button_impact(
+                    "Let Me In!!", 
+                    crate::theme::fill_green, 
+                    crate::theme::border_green, 
+                    || {}
+                );
+        
+                let sign_up_button = crate::assets::button_impact(
+                    "Sign Me Up!!", 
+                    crate::theme::fill_orange, 
+                    crate::theme::border_orange, 
+                    || {}
+                );
+
+                Row::new()
+                    .s(Align::new().top())
+                    .s(Width::fill())
+                    .s(Height::fill())
+                    .s(Gap::new().x(50))
+                    .multiline()
+                    .items(vec![
+                        sign_up_button.unify(),
+                        login_button.unify()
+                    ])
+            };
 
         let column = Column::new()
             .s(Width::fill())
@@ -63,13 +94,14 @@ impl LoginPage {
                     clone!((self => s) move |name| s.password.set(Arc::new(name)))
                 )
                 .unify(),
+                login_and_sign_up_button_row.unify()
             ]);
 
         El::new()
             .s(Align::center())
             .s(Width::fill())
             .s(Height::fill())
-            .s(Padding::all(25))
+            .s(Padding::all(50))
             .s(RoundedCorners::all(25))
             // show a rounded shadow on desktop
             .s(Shadows::with_signal(is_mobile.map_bool(
