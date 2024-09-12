@@ -63,7 +63,7 @@ impl LoginPage {
                 Row::new()
                     .s(Align::new().center_x())
                     .s(AlignContent::new().center_x())
-                    .s(Padding::new().top(50))
+                    .s(Padding::new().top(25))
                     .s(Width::fill())
                     // .s(Height::fill())
                     .s(Gap::new().x(50))
@@ -127,7 +127,7 @@ impl LoginPage {
         El::new()
             .s(Align::center())
             .s(Width::percent(90).max(400))
-            .s(Height::percent(90).max(500))
+            .s(Height::exact(450))
             .child(self.login_form())
     }
 
