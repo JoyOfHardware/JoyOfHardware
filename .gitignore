@@ -1,4 +1,5 @@
 target
+result
 frontend/wasm-bindgen*
 frontend/binaryen
 frontend/**/pkg

@@ -55,6 +55,8 @@ in
     installPhase = ''
       mkdir -p $out/bin
       cp ./target/release/backend $out/bin/app
+      cp -rf frontend $out/bin/
+      cp -rf public $out/bin/
     '';
 
     buildInputs = [
