@@ -1,11 +1,14 @@
-{ pkgs ? import (fetchTarball {
-  url = "https://github.com/NixOS/nixpkgs/archive/refs/tags/24.05.tar.gz";
-}) {}, src ? ./.}:
+{
+  pkgs ? import (fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/refs/tags/24.05.tar.gz";
+  }) { },
+  rustOverlay ? import (builtins.fetchTarball {
+      url = "https://github.com/oxalica/rust-overlay/archive/refs/heads/master.tar.gz";
+  }),
+  src ? ./.,
+}:
 
 let
-  rustOverlay = import (builtins.fetchTarball {
-      url = "https://github.com/oxalica/rust-overlay/archive/refs/heads/master.tar.gz";
-  });
   overlayedPkgs = import pkgs.path {
       overlays = [ rustOverlay ];
   };
@@ -22,7 +25,7 @@ let
 
   nightly = overlayedPkgs.rust-bin.nightly."2024-06-24".default.override {
     extensions = [ "rust-src" ];
-    targets = [ 
+    targets = [
     "wasm32-unknown-unknown"
     "x86_64-unknown-linux-gnu"
     ];
